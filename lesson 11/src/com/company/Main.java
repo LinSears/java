@@ -1,5 +1,7 @@
 package com.company;
 
+import java.util.Date;
+
 public class Main {
 
     public static void main(String[] args) {
@@ -72,5 +74,36 @@ public class Main {
         // приведение регистров
         System.out.println(str.toLowerCase());
         System.out.println(str.toUpperCase());
+
+        // форматирование строк
+        /* Флаги форматирования
+        %s - строка
+        %d - целое число (инт, лонг и тд)
+        %f - вещественное число (дабл, флоат)
+        %b - булеан
+        %c - символ (чар)
+        %t - вывод даты
+        %% - вывод символа процента
+        \n - переход на новую строку
+        \t - табуляция
+        \b - удаляет предыдущий символ
+        \\ - вывесли слеш\
+         */
+        int age = 25;
+        Date d = new Date();
+        String sFormat = String.format("\tМеня зовут\b %10s.\nМне %d лет. Мой рост %.2f см. Я хочу знать Java на 100%%. Сегодня: %tc",
+                "Вадим", age, 176.3, d);
+        System.out.println(sFormat);
+        System.out.println("hello\nworld");
+        //меняем очередность флагов, т.е. епрвым будет второй по счету аргумент
+        String sFormat2 = String.format("Мое счастливое число - %2$d. Мой любимый цвет - %1$s. Я ношу %s брюки", "red", 40);
+        System.out.println(sFormat2);
+        // преобразование нестроковых обьектов в строки
+        int a = 150;
+        String sa = String.valueOf(a);
+        System.out.println(sa);
+        double h = 23.78;
+        String sh = String.valueOf(h);
+        System.out.println(sh);
     }
 }
