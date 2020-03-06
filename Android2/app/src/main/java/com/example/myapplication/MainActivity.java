@@ -11,6 +11,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.example.myapplication.api.APIService;
+import com.example.myapplication.model.LoginRequest;
+import com.example.myapplication.model.LoginResponse;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class MainActivity extends AppCompatActivity {
 
     @Override
@@ -36,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
                     errorMsg.setVisibility(View.VISIBLE);
                     return;
                 }
-                showMenuActivity();
+                loginUser(login.getText().toString(), password.getText().toString());
             }
         });
         TextView signupBtn = findViewById(R.id.signupBtn);
@@ -75,5 +83,32 @@ public class MainActivity extends AppCompatActivity {
         startActivity(i);
     }
 
+    /*public void showStartActivity() {
+        Intent i = new Intent(this, StartActivity.class);
+        StartActivity(i);
+    }*/
+
+    public void loginUser(String email, String password) {
+        LoginRequest r = new LoginRequest();
+        r.email = email;
+        r.password = password;
+        APIService.getInstance().getAPI().login(r).enqueue(new Callback<LoginResponse>() {
+            @Override
+            public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
+                LoginResponse resp = response.body();
+                if (!resp.result) {
+                    // TODO: обработка ошибки
+                } else {
+                    // TODO: сохранито токен в памяти устройства
+                    showMenuActivity();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<LoginResponse> call, Throwable t) {
+                // TODO: обработка ошибки
+            }
+        });
+    }
 
 }

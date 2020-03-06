@@ -1,0 +1,19 @@
+json: (JavaScript Object Notation)
+
+{} - Объявление обьекта
+[] - Объявление массива
+123 - Объявление числового значения
+"hello" - Объявление строкового значения
+true/false - Объявление логического значения
+
+ПРИМЕР:
+{
+	"name": "Vasya",
+	"age": 45,
+	"isMarried": true,
+	"favoriteDrinks": ["Cola", "Sprite", "Pepsi"],
+	"passport": {
+		"number": "KB123456",
+		"expireDate": "11/12/2021"
+	}
+}
