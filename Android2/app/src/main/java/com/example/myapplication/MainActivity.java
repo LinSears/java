@@ -3,7 +3,9 @@ package com.example.myapplication;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
@@ -20,6 +22,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
+    private TextView errorMsg;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
         final EditText login = (EditText) findViewById(R.id.login);
         final EditText password = (EditText) findViewById(R.id.password);
         Button loginBtn = findViewById(R.id.loginBtn);
-        final TextView errorMsg = findViewById(R.id.errorMsg);
+        errorMsg = findViewById(R.id.errorMsg);
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -97,18 +100,26 @@ public class MainActivity extends AppCompatActivity {
             public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
                 LoginResponse resp = response.body();
                 if (!resp.result) {
-                    // TODO: обработка ошибки
+                    errorMsg.setVisibility(View.VISIBLE);
+                    errorMsg.setText(resp.error);
                 } else {
-                    // TODO: сохранито токен в памяти устройства
+                    //сохранить токен в памяти устройства(в кеше приложении)
+                    SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(MainActivity.this);
+                    SharedPreferences.Editor editor = preferences.edit();
+                    editor.putString("API_TOKEN", resp.token);
+                    editor.apply();
+                    // получение объекта из кеша
+                    // preferences.getString ("API_TOKEN", "default");
                     showMenuActivity();
                 }
             }
 
             @Override
             public void onFailure(Call<LoginResponse> call, Throwable t) {
-                // TODO: обработка ошибки
+                errorMsg.setVisibility(View.VISIBLE);
+                errorMsg.setText(t.getMessage());
             }
         });
     }
-
 }
+// TODO: компьютерные сети, Дмитрий бачило
