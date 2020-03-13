@@ -15,6 +15,7 @@ import com.example.myapplication.model.ConfirmRequest;
 import com.example.myapplication.model.ConfirmResponse;
 import com.example.myapplication.model.RegistrationRequest;
 import com.example.myapplication.model.RegistrationResponse;
+import com.google.gson.Gson;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -65,7 +66,14 @@ public class ConfirmActivity extends AppCompatActivity {
                 .enqueue(new Callback<ConfirmResponse>() {
                     @Override
                     public void onResponse(Call<ConfirmResponse> call, Response<ConfirmResponse> response) {
-                        ConfirmResponse resp = response.body();
+                        ConfirmResponse resp = null;
+                        if (!response.isSuccessful()) {
+                            Gson g = new Gson();
+                            resp = g.fromJson(response.errorBody().charStream(),ConfirmResponse.class);
+                        } else {
+                            resp = response.body();
+                        }
+                        //ConfirmResponse resp = response.body();
                         if (!resp.result) {
                             showError(resp.error);
                         } else {

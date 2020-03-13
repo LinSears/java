@@ -13,9 +13,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.example.myapplication.api.APIBuilder;
 import com.example.myapplication.api.APIService;
 import com.example.myapplication.model.LoginRequest;
 import com.example.myapplication.model.LoginResponse;
+import com.google.gson.Gson;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -91,27 +93,53 @@ public class MainActivity extends AppCompatActivity {
         StartActivity(i);
     }*/
 
+    public void showError(String err) {
+        errorMsg.setVisibility(View.VISIBLE);
+        errorMsg.setText(err);
+    }
+
     public void loginUser(String email, String password) {
         LoginRequest r = new LoginRequest();
         r.email = email;
         r.password = password;
-        APIService.getInstance().getAPI().login(r).enqueue(new Callback<LoginResponse>() {
+        APIBuilder<LoginRequest, LoginResponse> builder = new APIBuilder<>();
+
+            builder.execute("login", r, new APIBuilder.onCallback<LoginResponse>() {
+                @Override
+                public void onResponse(LoginResponse resp) {
+                    if (!resp.result) {
+                        showError(resp.error);
+                    } else {
+                        //сохранить токен в памяти устройства(в кеше приложении)
+                        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(MainActivity.this);
+                        SharedPreferences.Editor editor = preferences.edit();
+                        editor.putString("API_TOKEN", resp.token);
+                        editor.apply();
+                        // получение объекта из кеша
+                        // preferences.getString ("API_TOKEN", "default");
+                        showMenuActivity();
+                    }
+                }
+
+                @Override
+                public void onError(Exception e) {
+                    showError(e.getMessage());
+                }
+            });
+
+        // не надо
+        /*APIService.getInstance().getAPI().login(r).enqueue(new Callback<LoginResponse>() {
             @Override
             public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
-                LoginResponse resp = response.body();
-                if (!resp.result) {
-                    errorMsg.setVisibility(View.VISIBLE);
-                    errorMsg.setText(resp.error);
+                LoginResponse resp = null;
+                if (!response.isSuccessful()) {
+                    Gson g = new Gson();
+                    resp = g.fromJson(response.errorBody().charStream(),LoginResponse.class);
                 } else {
-                    //сохранить токен в памяти устройства(в кеше приложении)
-                    SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(MainActivity.this);
-                    SharedPreferences.Editor editor = preferences.edit();
-                    editor.putString("API_TOKEN", resp.token);
-                    editor.apply();
-                    // получение объекта из кеша
-                    // preferences.getString ("API_TOKEN", "default");
-                    showMenuActivity();
+                    resp = response.body();
                 }
+                //LoginResponse resp = response.body(); вроде не нужен
+
             }
 
             @Override
@@ -119,7 +147,7 @@ public class MainActivity extends AppCompatActivity {
                 errorMsg.setVisibility(View.VISIBLE);
                 errorMsg.setText(t.getMessage());
             }
-        });
+        }*/;
     }
+    // TODO: компьютерные сети, Дмитрий бачило
 }
-// TODO: компьютерные сети, Дмитрий бачило

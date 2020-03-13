@@ -15,9 +15,9 @@ public interface MyFamily {
     @POST("/login")
     Call<LoginResponse> login(@Body LoginRequest r);
 
-    @POST("/registration")
+    @POST("/register")
     Call<RegistrationResponse> registration(@Body RegistrationRequest r);
 
-    @POST("/confirm")
+    @POST("/submit")
     Call<ConfirmResponse> confirm(@Body ConfirmRequest r);
 }
