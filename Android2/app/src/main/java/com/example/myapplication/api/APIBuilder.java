@@ -18,7 +18,7 @@ public class APIBuilder<Req, Res> {
         void onError(Exception e);
     }
 
-    public void execute(String call, Req req, final onCallback callback) {
+    public void execute(String call, Req req, final Class<Res> respT, final onCallback callback) {
         MyFamily api = APIService.getInstance().getAPI();
         //рефлексия
         // получаем метод интерфейса Майфемили по его названию
@@ -32,10 +32,8 @@ public class APIBuilder<Req, Res> {
                     Res res;
                     if (!response.isSuccessful()) {
                         Gson g = new Gson();
-                        Type responceType = new TypeToken<Res>() {
-                        }.getType();
                         res = g.fromJson(
-                                response.errorBody().charStream(), responceType);
+                                response.errorBody().charStream(), respT);
                     } else {
                         res = response.body();
                     }
