@@ -104,7 +104,7 @@ public class MainActivity extends AppCompatActivity {
         r.password = password;
         APIBuilder<LoginRequest, LoginResponse> builder = new APIBuilder<>();
 
-            builder.execute("login", r, new APIBuilder.onCallback<LoginResponse>() {
+            builder.execute("login", r, LoginResponse.class, new APIBuilder.onCallback<LoginResponse>() {
                 @Override
                 public void onResponse(LoginResponse resp) {
                     if (!resp.result) {

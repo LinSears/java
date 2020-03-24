@@ -6,9 +6,16 @@ public class Finance {
     @SerializedName("sum")
     public float sum;
     @SerializedName("name")
-    String name;
+    public String name;
     @SerializedName("creditLabel")
     public String creditLabel;
     @SerializedName("date")
     public String date;
+
+    public Finance(float sum, String name, String creditLabel, String date) {
+        this.sum = sum;
+        this.creditLabel = creditLabel;
+        this.date = date;
+        this.name = name;
+    }
 }
