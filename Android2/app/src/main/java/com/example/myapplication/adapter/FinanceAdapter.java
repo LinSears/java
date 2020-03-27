@@ -17,7 +17,7 @@ public class FinanceAdapter extends BaseAdapter {
     private Finance[] finances;
     private Context context;
 
-    public FinanceAdapter(Context context,Finance[] Finances) {
+    public FinanceAdapter(Context context,Finance[] finances) {
         this.finances = finances;
         this.context = context;
     }

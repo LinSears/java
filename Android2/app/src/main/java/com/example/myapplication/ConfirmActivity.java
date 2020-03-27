@@ -59,6 +59,9 @@ public class ConfirmActivity extends AppCompatActivity {
         // запрос на сервер
         ConfirmRequest r = new ConfirmRequest();
         r.code = code;
+
+
+
         APIService
                 .getInstance()
                 .getAPI()
