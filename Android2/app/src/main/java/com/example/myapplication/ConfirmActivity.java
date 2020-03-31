@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.example.myapplication.api.APIBuilder;
 import com.example.myapplication.api.APIService;
 import com.example.myapplication.model.ConfirmRequest;
 import com.example.myapplication.model.ConfirmResponse;
@@ -62,7 +63,30 @@ public class ConfirmActivity extends AppCompatActivity {
 
 
 
-        APIService
+        /*APIBuilder<ConfirmRequest,ConfirmResponse> builder = new APIBuilder<>();
+
+        builder.execute("confirm", r, ConfirmResponse.class, new APIBuilder.onCallBack<ConfirmResponse>() {
+        @Override
+        public void onResponse(ConfirmResponse resp) {
+        if (!resp.result){
+            showError(resp.error);
+        } else {
+            showMenuActivity();
+            }
+        }
+
+        @Override
+            public void onError(Exception e) {
+
+            }
+        });
+
+    }*/
+
+
+
+
+       APIService
                 .getInstance()
                 .getAPI()
                 .confirm(r)
