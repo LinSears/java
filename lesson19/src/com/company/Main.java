@@ -40,8 +40,6 @@ public class Main {
             }
         }
 
-
-
         //String[] arr = s.split("");
     }
 }
