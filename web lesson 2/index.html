@@ -1,0 +1,94 @@
+<!DOCTYPE html> 
+<html>
+
+<head>
+    <title>Hello world</title> 
+    <meta charset="UTF-8">
+</head>
+
+<body>
+    <!-- элементы формы -->
+    <input type="text"/> <!-- type=text - обычное текстовое поле -->
+    <input value="Hello"/> <!-- type=text - сразу пишется что-то в поле -->
+    <input placeholder="Введите текст"/>
+    <br />
+    <input type="number"/> <!-- допустим ввод только чисел -->
+    <br />
+    <input type="checkbox"/> <!-- флажок -->
+    <br />
+    <input type="date"/>
+    <br />
+    <input type="email"/> <!-- tel, url -->
+    <br />
+    <input type="password"/>
+    <br />
+    <input type="file"/>
+    <br />
+    <input type="button" value="Нажми меня!">
+    <button>Кнопка</button>
+
+    <form action="https://www.google.com" method="POST"> <!-- атрибут name задает уникальный идентификатор элемента в рамках тега form -->
+        <input name="key" />
+        <select name="fruit"> <!-- выпадающий список -->  <!-- значения атрибута value должны быть уникальными в рамках тега select -->
+            <option value="banana">Банан</option>
+            <option value="apple">Яблоко</option>
+            <option selected value="tangerine">Мандарин</option>
+        </select>
+        <input type="button" value="Очистить">
+        <input type="submit" value="Отправить"/> <!-- type=submit это кнопка, которая провоцирует отправку данных на сервер.
+            Будут отправлены только те значения элемента формы, у которых задан не пустой атрибут name -->
+    </form>
+
+    <!-- таблицы в html -->
+    <table border="1">
+        <thead> <!-- заголовок таблицы -->
+            <tr> <!-- строка таблицы -->
+                <th>Имя</th> <!-- столбцы таблицы(текст жирный) -->
+                <th>Email</th>
+                <th>Age</th>
+            </tr>
+        </thead>
+
+        <tbody> <!-- тело таблицы -->
+            <tr>
+                <td>Vasya</td>
+                <td>vasya@mail.ru</td>
+                <td>34</td>
+            </tr>
+            <tr>
+                <td>Kolya</td>
+                <td>kolya@mail.ru</td>
+                <td>35</td>
+            </tr>
+
+            <!-- обьединение строк -->
+            <tr>
+                <td rowspan="2">Levon</td>
+                <td>levon@mail.ru</td>
+                <td rowspan="2">56</td>
+            </tr>
+            <tr>
+                <td>lyova@mail.ru</td>
+            </tr>
+
+            <!-- обьединение столбцов -->
+            <tr>
+                <td>Jane</td>
+                <td colspan="2">Hello</td>
+            </tr>
+        </tbody>
+
+        <tfoot> <!-- нижняя часть таблицы -->
+
+        </tfoot>
+    </table>
+
+    <!-- мнемоники в html -->
+    <p>&gt;</p>
+    <p>&lt;</p>
+    <p>&lt;a&gt;Google.com&lt;/a&gt;</p>
+    
+
+</body>
+
+</html>
