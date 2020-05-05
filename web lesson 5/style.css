@@ -1,0 +1,195 @@
+.container {
+    width: 600px;
+    padding: 16px;
+    background: grey;
+    display: flex; /*задаем flex-контейнер*/
+}
+
+.container > div {
+    width: 40px;
+    padding: 10px;
+    background: green;
+    color: white;
+    font-size: 18px;
+    margin: 6px;
+    text-align: center;
+}
+
+.c2 {
+    /*задает направление главной оси*/
+    /*
+    (*) row - по горизонтали, слева на право
+    column - по вертикали, сверху вниз
+    row-reverse - по горизонтали, справо на лево
+    column-reverse - по вертикали, снизу вверх
+    */
+    flex-direction: column;
+}
+
+.c3 {
+    justify-content: flex-start;
+}
+
+span {
+    margin: 16px 0;
+    display: block;
+}
+
+.c4 {
+    justify-content: flex-end; 
+}
+
+.c5 {
+    justify-content: center;
+}
+
+.c6 {
+    /*обеспечивает одинаковое расстояние между flex-items, но не между flex-items и границами flex-контейнера.*/
+justify-content: space-between;
+}
+
+.c7 {
+    /*обеспечивает одинаковое расстояние между flex-items,
+    при этом расстояние между крайними элементами и границами flex-контейнера равно половине расстояния между элементами внутри контейнера*/
+    justify-content: space-around;
+}
+
+.c8 {
+    /*отвечает за расположение элементов вдоль поперечной оси*/
+    align-items: flex-start;
+    height: 90px;
+}
+
+div.b4 {
+    height: 50px;
+    background: orange;
+}
+
+.c9 {
+    align-items: flex-end;
+}
+
+.c10 {
+    align-items: baseline;
+    vertical-align: middle;
+}
+
+.c11 {
+    align-items: center;
+    
+}
+
+.c12 {
+    align-items: stretch;
+}
+
+.c13 {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.c14 {
+    align-items: flex-start;
+    height: 100px;
+}
+
+div.b5 {
+    /*индивидуально задает положение элемента внутри flex-контейнера вдоль поперечной оси*/
+    align-self: center;
+}
+
+.c15 > div {
+    /*принимает значение от 0 до 9999*/
+    /*по умолчанию - флекс гроу равен нулю*/
+    flex-grow: 1;
+}
+
+div.b3 {
+    flex-grow: 3;
+}
+
+div.c16 {
+    width: 100%;
+}
+
+.c16 > div {
+    /*принимает значение от 0 до 9999. По умолчанию равен единице*/
+    flex-shrink: 1;
+    flex-grow: 1;
+}
+
+div.b2 {
+    flex-shrink: 0;
+    width: 100px;
+}
+
+
+/* Единицы измерения в CSS*/
+/*% - устанавливает значение в процентах относительно родительского элемента*/
+p {
+    height: 20%;
+}
+
+/*cm - устанавливает значение в сантиметрах*/
+p {
+    width: 20cm;
+}
+
+/*mm - значение в милиметрах*/
+p {
+    font-size: 10mm;
+}
+
+/*in - значение в дюймах*/
+p {
+    top: 15in;
+}
+
+/*px - значение в пикселях*/
+p {
+    border: 10px solid red;
+}
+
+/*em - устанавливает значение относительно текущего размера шрифта*/
+/*Пример:
+font-size: 16px;
+1em = 16px;
+*/
+p {
+    font-size: 10px;
+    bottom: 0.45em;
+}
+
+/*ex - устанавливает значение относительно высоты шрифта(строчной буквы)*/
+p {
+    width: 10.5ex;
+}
+
+/*pt - значение в типографских пунктах(твип)*/
+p {
+    left: 15pt;
+}
+
+/*pc - значение в пиках*/
+/*1пика=12pt*/
+p {
+    font-size: 2pc;
+}
+
+/*vh - значение относительно высоты окна просмотра
+1vh = 1% высоты окна просмотра*/
+p {
+    width: 5vh; /*40px при высоте экрана в 800px*/
+}
+
+/*vw - значение относительно ширины окна просмотра
+1vw = 1% ширины окна просмотра*/
+p {
+    width: 5vw;
+}
+
+/*vmin - равна 1vh, либо 1vw, в зависимости от того, что меньше*/
+p {
+    height: 10vmin;
+}
